@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import Link from "next/link"
+import { createAccount } from "@/lib/actions/user.actions"
 
  
   type FormType = "sign-in" | "sign-up";
@@ -37,6 +38,7 @@ export default function AuthForm({type}:{
 // define states
 const [isLoading,setIsLoading] = useState(false)
 const [errorMessage,setErrorMessage] = useState("")
+const [accountId, setAccountId] = useState<string | null>(null);
 
     // 1. Define your form.
     const formSchema = authFormSchema(type);
@@ -50,8 +52,24 @@ const [errorMessage,setErrorMessage] = useState("")
  
   // 2. Define a submit handler.
   const  onSubmit=  async(values: z.infer<typeof formSchema>)=> {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      const user =
+      type === "sign-up"
+        ? await createAccount({
+            fullName: values.fullName || "",
+            email: values.email,
+          }):""
+        // : await signInUser({ email: values.email });
+
+      setAccountId(user.accountId)
+    } catch (error) {
+      setErrorMessage("Failed to create account please try again later")
+    }finally{
+      setIsLoading(false)
+    }
+
     console.log(values)
 
   }

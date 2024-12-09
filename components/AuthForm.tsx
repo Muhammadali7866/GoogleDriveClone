@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import Link from "next/link"
 import { createAccount } from "@/lib/actions/user.actions"
+import OtpModel from "./OTPModel"
 
  
   type FormType = "sign-in" | "sign-up";
@@ -133,5 +134,6 @@ const [accountId, setAccountId] = useState<string | null>(null);
       </form>
     </Form>
     {/* OTP verification */}
+    {accountId && <OtpModel email={form.getValues("email")} accountId={accountId} />}
     </>
   )}

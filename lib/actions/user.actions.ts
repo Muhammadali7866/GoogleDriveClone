@@ -98,15 +98,13 @@ export const getCurrentUser = async () => {
     const { databases, account } = await createSessionClient();
 
     const result = await account.get();
-    console.log({result});
     
 
     const user = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.usersCollectionId,
-      [Query.equal("accountId", result.$id)],
+      // [Query.equal("accountId", result.$id)],
     );
-    console.log({user});
     
 
     if (user.total <= 0) return null;

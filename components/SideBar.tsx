@@ -35,11 +35,12 @@ export default function SideBar ({fullName,avatar,email}:Props){
             <Image src="/assets/images/files-2.png" alt="logo" width={506} height={418} className="w-full" />
             <div className="sidebar-user-info">
                 <Image src={avatarPlaceholderUrl} alt="Avatar" width={44} height={44} className="sidebar-user-avatar" />
-            </div>
-            <div className="hidden lg:block">
+                <div className="hidden lg:block">
                 <p className="subtitle-2 captalize">{fullName}</p>
                 <p className="caption">{email}</p>
             </div>
+            </div>
+            
         </aside>
     )
 }

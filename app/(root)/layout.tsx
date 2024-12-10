@@ -32,7 +32,7 @@ export default async function RootLayout({
     <main className="flex h-screen">
         <SideBar {...currentUser} />
         <section className="flex flex-1 h-full flex-col">
-            <MobileNavigation/> <Header />
+            <MobileNavigation {...currentUser} /> <Header />
             <div className="main-content">{children}</div>
         </section>
     </main>
